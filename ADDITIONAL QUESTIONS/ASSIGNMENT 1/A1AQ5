@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int T;
+    cin >> T;
+
+    while (T--)
+    {
+        int N, H, W;
+        cin >> N >> H >> W;
+
+        int side = max(H, W);
+
+        while ((side / H) * (side / W) < N)
+            side++;
+
+        cout << side << endl;
+    }
+
+    return 0;
+}
