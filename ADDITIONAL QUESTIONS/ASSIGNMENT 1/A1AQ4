@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int arr[] = {3, 1, 4, 2};
+    int n = 4, k = 1;
+    int specialty = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        bool isSpecial = false;
+
+        for (int l = 0; l <= i; l++)
+        {
+            for (int r = i; r < n; r++)
+            {
+                int count = 0;
+                for (int x = l; x <= r; x++)
+                {
+                    if (arr[x] > arr[i])
+                        count++;
+                }
+                if (count == k)
+                    isSpecial = true;
+            }
+        }
+
+        if (isSpecial)
+            specialty += arr[i];
+    }
+
+    cout << "Specialty of sequence = " << specialty;
+    return 0;
+}
