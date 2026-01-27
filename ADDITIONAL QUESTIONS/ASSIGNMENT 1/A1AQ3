@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+int median(int arr[], int l, int r)
+{
+    int temp[100];
+    int k = 0;
+
+    for (int i = l; i <= r; i++)
+        temp[k++] = arr[i];
+
+    for (int i = 0; i < k; i++)
+        for (int j = i + 1; j < k; j++)
+            if (temp[i] > temp[j])
+                swap(temp[i], temp[j]);
+
+    return temp[k / 2];
+}
+
+int main()
+{
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = 5;
+
+    while (n > 2)
+    {
+        int minMedian = 1e9;
+        int removeIndex = -1;
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i + 2; j < n; j += 2)
+            {
+                int med = median(arr, i, j);
+                if (med < minMedian)
+                {
+                    minMedian = med;
+                    removeIndex = i;
+                }
+            }
+        }
+
+        for (int i = removeIndex; i < n - 1; i++)
+            arr[i] = arr[i + 1];
+
+        n--;
+    }
+
+    cout << "Sum of remaining elements = " << arr[0] + arr[1];
+    return 0;
+}
